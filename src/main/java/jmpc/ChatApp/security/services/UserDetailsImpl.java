@@ -56,7 +56,7 @@ public static UserDetailsImpl build(User user) {
 
 		return new UserDetailsImpl(
 				user.getId(), 
-				user.getUserName(), 
+				user.getUsername(), 
 				user.getEmail(),
 				user.getDescription(),
 				user.getProfilePic(),

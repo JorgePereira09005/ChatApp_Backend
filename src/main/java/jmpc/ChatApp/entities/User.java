@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="user",
@@ -70,7 +71,7 @@ public class User {
 	@Column(name="description")
 	private String description;
 	
-	@JsonBackReference
+//	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="postedBy")
 	private Set<Post> posts = new HashSet<>();
 	
@@ -79,6 +80,12 @@ public class User {
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+	
+//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="requester")
+//	private Set<FriendRequest> requestsMade = new HashSet<>();
+//	
+//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="requestedTo")
+//	private Set<FriendRequest> requestsReceived = new HashSet<>();
 	
 	public User() {
 		
@@ -104,14 +111,6 @@ public class User {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getUserName() {
-		return username;
-	}
-
-	public void setUserName(String userName) {
-		this.username = userName;
 	}
 
 	public String getEmail() {
@@ -164,6 +163,7 @@ public class User {
 		this.description = description;
 	}
 
+	@JsonIgnore
 	public Set<Post> getPosts() {
 		return posts;
 	}
@@ -172,12 +172,21 @@ public class User {
 		this.posts = posts;
 	}
 
+	@JsonIgnore
 	public Set<Role> getRoles() {
 		return roles;
 	}
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Override

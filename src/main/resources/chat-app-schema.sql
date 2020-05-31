@@ -46,11 +46,12 @@ INSERT INTO user(user_name, email, password, first_name, last_name, description)
 -- Table `chat-app`.`friend_request`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chat-app`.`friend_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` DATETIME NOT NULL,
   `is_accepted` bool,
   `requester_id` int(11) NOT NULL,
   `requested_to_id` int(11) NOT NULL,
-  PRIMARY KEY (`requester_id`, `requested_to_id`),
+  PRIMARY KEY (`id`),
   
   KEY `fk_user_requester` (`requester_id`),
   CONSTRAINT `fk_user_requester` FOREIGN KEY  (requester_id) REFERENCES `user` (`id`),

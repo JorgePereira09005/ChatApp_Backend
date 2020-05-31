@@ -1,6 +1,7 @@
 package jmpc.ChatApp.entities;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -35,19 +37,30 @@ public class Post {
 	@Column(name="content")
 	private String content;
 	
-	@JsonManagedReference
+//	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="poster_id", nullable = false)
+	@JoinColumn(name="poster_id")
 	private User postedBy;
 	
-	@JsonManagedReference
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="parent_post_id", nullable = false)
+//	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="parent_post_id")
 	private Post parentPost;
 	
-	@JsonBackReference
+//	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY ,cascade =  CascadeType.ALL, mappedBy = "parentPost")
-	private Set<Post> childrenPosts;
+	private Set<Post> childrenPosts = new HashSet<>();
+	
+	public Post() {
+		
+	}
+
+	public Post(LocalDateTime datePost, String content, User postedBy, Post parentPost) {
+		this.datePost = datePost;
+		this.content = content;
+		this.postedBy = postedBy;
+		this.parentPost = parentPost;
+	}
 
 	public Integer getId() {
 		return id;
@@ -89,6 +102,7 @@ public class Post {
 		this.parentPost = parentPost;
 	}
 
+	@JsonIgnore
 	public Set<Post> getChildrenPosts() {
 		return childrenPosts;
 	}
