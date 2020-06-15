@@ -42,10 +42,16 @@ public class Post {
 	@JoinColumn(name="poster_id")
 	private User postedBy;
 	
+	@Column(name="poster_id", insertable = false, updatable = false)
+	private Integer postedbyid;
+	
 //	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="parent_post_id")
 	private Post parentPost;
+	
+	@Column(name="parent_post_id", insertable = false, updatable = false)
+	private Integer parentpostid;
 	
 //	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY ,cascade =  CascadeType.ALL, mappedBy = "parentPost")
@@ -94,6 +100,7 @@ public class Post {
 		this.postedBy = postedBy;
 	}
 
+	@JsonIgnore
 	public Post getParentPost() {
 		return parentPost;
 	}
@@ -102,13 +109,29 @@ public class Post {
 		this.parentPost = parentPost;
 	}
 
-	@JsonIgnore
 	public Set<Post> getChildrenPosts() {
 		return childrenPosts;
 	}
 
 	public void setChildrenPosts(Set<Post> childrenPosts) {
 		this.childrenPosts = childrenPosts;
+	}
+
+	@JsonIgnore
+	public Integer getPostedbyid() {
+		return postedbyid;
+	}
+
+	public void setPostedbyid(Integer postedbyid) {
+		this.postedbyid = postedbyid;
+	}
+
+	public Integer getParentpostid() {
+		return parentpostid;
+	}
+
+	public void setParentpostid(Integer parentpostid) {
+		this.parentpostid = parentpostid;
 	}
 	
 }

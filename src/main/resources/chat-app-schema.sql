@@ -34,12 +34,12 @@ ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 -- In this example, the default password for every user is 123lol
 
 
-INSERT INTO user(user_name, email, password, first_name, last_name, description) 
-	VALUES('podro', 'podro@kek.com', '$2a$10$aMD25iNwLVcO.ESl7NKCWesPoXljsAddjnltWKRTJ/fUVdPeXhExO', 'podro', 'podra', 'blah blah blah fictitious user yada yada');
-INSERT INTO user(user_name, email, password, first_name, last_name, description) 
-	VALUES('bbyoda', 'bbyoda@kek.com', '$2a$10$aMD25iNwLVcO.ESl7NKCWesPoXljsAddjnltWKRTJ/fUVdPeXhExO', 'baby', 'yoda', 'me baby yoda can be touched not by you');
-INSERT INTO user(user_name, email, password, first_name, last_name, description) 
-	VALUES('codsux', 'codsux@kek.com', '$2a$10$aMD25iNwLVcO.ESl7NKCWesPoXljsAddjnltWKRTJ/fUVdPeXhExO', 'codsux', 'nobueno', 'go play a gud game');
+INSERT INTO user(user_name, email, profile_pic_url , password, first_name, last_name, description) 
+	VALUES('podro', 'podro@kek.com', 'https://bordalo.observador.pt/500x,q85/https://s3.observador.pt/wp-content/uploads/2019/03/13083706/mazda3_hb_polymetal_action-14_770x433_acf_cropped.jpg' ,'$2a$10$aMD25iNwLVcO.ESl7NKCWesPoXljsAddjnltWKRTJ/fUVdPeXhExO', 'podro', 'podra', 'blah blah blah fictitious user yada yada');
+INSERT INTO user(user_name, email, profile_pic_url , password, first_name, last_name, description)  
+	VALUES('bbyoda', 'bbyoda@kek.com', 'https://sm.ign.com/t/ign_pt/news/b/baby-yoda-/baby-yoda-sipping-soup-is-twitters-new-meme-able-moment_q3c4.h720.jpg' , '$2a$10$aMD25iNwLVcO.ESl7NKCWesPoXljsAddjnltWKRTJ/fUVdPeXhExO', 'baby', 'yoda', 'me baby yoda can be touched not by you');
+INSERT INTO user(user_name, email, profile_pic_url , password, first_name, last_name, description) 
+	VALUES('codsux', 'codsux@kek.com', 'https://external-preview.redd.it/2rf07STaikt8u9PcC_EaK9L-dk-6SIHxNok6ZNw37Q8.jpg?auto=webp&s=ab04bd1126b57fba43c47827ea2a95552189c35d' ,'$2a$10$aMD25iNwLVcO.ESl7NKCWesPoXljsAddjnltWKRTJ/fUVdPeXhExO', 'codsux', 'nobueno', 'go play a gud game');
 
 
 -- -----------------------------------------------------
@@ -47,7 +47,7 @@ INSERT INTO user(user_name, email, password, first_name, last_name, description)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chat-app`.`friend_request` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` DATETIME NOT NULL,
+  `date` DATETIME,
   `is_accepted` bool,
   `requester_id` int(11) NOT NULL,
   `requested_to_id` int(11) NOT NULL,
@@ -89,6 +89,8 @@ AUTO_INCREMENT = 1;
 
 INSERT INTO post(date_post, content, poster_id, parent_post_id) 
 	VALUES('2020-11-01 11:30:45', 'TEST TEST TEST KEK TEST TEST TEST', 1 , null);
+INSERT INTO post(date_post, content, poster_id, parent_post_id) 
+	VALUES('2020-11-01 11:30:45', 'TEST2TEST2TEST2 LOLOLOLOLOLOLOLOL', 1 , null);
 INSERT INTO post(date_post, content, poster_id, parent_post_id) 
 	VALUES('2020-11-01 23:11:56', 'TEST2 TEST2 TEST2 BUR TEST2 TEST2 TEST2', 1 , 1);
 INSERT INTO post(date_post, content, poster_id, parent_post_id) 
